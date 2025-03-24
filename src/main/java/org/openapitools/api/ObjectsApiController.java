@@ -5,35 +5,16 @@ import org.openapitools.model.ModelObject;
 import org.openapitools.model.ObjectRequest;
 import org.openapitools.model.ObjectResponse;
 import org.openapitools.model.ObjectsIdDelete200Response;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import javax.annotation.Generated;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-24T18:55:33.945312570+01:00[Europe/Madrid]", comments = "Generator version: 7.12.0")
 @Controller
@@ -57,9 +38,7 @@ public class ObjectsApiController implements ObjectsApi {
     @Override
     public ResponseEntity<ModelObject> objectsIdGet(String id) {
         Optional<ModelObject> found = lista.stream().filter(modelObject -> modelObject.getId().equals(id)).findFirst();
-        if (found.isPresent())
-            return ResponseEntity.ok(found.get());
-        else return ResponseEntity.notFound().build();
+        return found.isPresent() ? ResponseEntity.ok(found.get()) : ResponseEntity.notFound().build();
     }
 
     @Override
