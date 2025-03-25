@@ -22,7 +22,7 @@ public class ObjectsApiController implements ObjectsApi {
     private final ObjectMapper mapper = new ObjectMapper();
 
     static{
-        lista.add(new ModelObject().name("Peluche Tiburón").data(new ModelData().photo("test").description("ssdada").price(0.0)));
+        lista.add(new ModelObject().id(UUID.randomUUID().toString()).name("Peluche Tiburón").data(new ModelData().photo("test").description("ssdada").price(0.0)));
     }
 
 
@@ -33,7 +33,7 @@ public class ObjectsApiController implements ObjectsApi {
 
     @Override
     public ResponseEntity<ObjectsIdDelete200Response> objectsIdDelete(String id) {
-        lista.stream().dropWhile(modelObject -> modelObject.getId().equals(id));
+        lista.stream().filter(modelObject -> modelObject.getId().equals(id)).findFirst().ifPresent(model -> lista.remove(model));
         return ResponseEntity.ok(new ObjectsIdDelete200Response().message("deleted"));
     }
 
@@ -56,7 +56,12 @@ public class ObjectsApiController implements ObjectsApi {
     @Override
     public ResponseEntity<ObjectResponse> objectsIdPut(String id, ObjectRequest objectRequest) {
         Optional<ModelObject> found = lista.stream().filter(modelObject -> modelObject.getId().equals(id)).findFirst();
-        found.ifPresent(modelObject -> modelObject = mapper.convertValue(objectRequest, ModelObject.class));
+        found.ifPresent(modelObject -> {
+            lista.remove(modelObject);
+            modelObject = mapper.convertValue(objectRequest, ModelObject.class);
+            modelObject.id(id);
+            lista.add(modelObject);
+        });
         return found.isPresent() ? ResponseEntity.ok(new ObjectResponse().id(found.get().getId())) : ResponseEntity.notFound().build();
     }
 
