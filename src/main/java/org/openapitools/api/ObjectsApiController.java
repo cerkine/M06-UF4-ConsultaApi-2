@@ -1,10 +1,7 @@
 package org.openapitools.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.openapitools.model.ModelObject;
-import org.openapitools.model.ObjectRequest;
-import org.openapitools.model.ObjectResponse;
-import org.openapitools.model.ObjectsIdDelete200Response;
+import org.openapitools.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +20,11 @@ public class ObjectsApiController implements ObjectsApi {
 
     private final NativeWebRequest request;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    static{
+        lista.add(new ModelObject().name("Peluche Tiburón").data(new ModelData().photo("test").description("ssdada").price(0.0)));
+    }
+
 
     @Override
     public ResponseEntity<List<ModelObject>> objectsGet() {
