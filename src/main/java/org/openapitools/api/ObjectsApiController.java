@@ -21,7 +21,7 @@ public class ObjectsApiController implements ObjectsApi {
     private final NativeWebRequest request;
     private final ObjectMapper mapper = new ObjectMapper();
 
-    static{
+    static {
         lista.add(new ModelObject().id(UUID.randomUUID().toString()).name("Peluche Tiburón").data(new ModelData().photo("test").description("ssdada").price(0.0)));
     }
 
@@ -33,7 +33,7 @@ public class ObjectsApiController implements ObjectsApi {
 
     @Override
     public ResponseEntity<ObjectsIdDelete200Response> objectsIdDelete(String id) {
-        lista.stream().filter(modelObject -> modelObject.getId().equals(id)).findFirst().ifPresent(model -> lista.remove(model));
+        lista.removeIf(object -> object.getId().equals(id));
         return ResponseEntity.ok(new ObjectsIdDelete200Response().message("deleted"));
     }
 
