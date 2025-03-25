@@ -5,10 +5,7 @@
  */
 package org.openapitools.api;
 
-import org.openapitools.model.ModelObject;
-import org.openapitools.model.ObjectRequest;
-import org.openapitools.model.ObjectResponse;
-import org.openapitools.model.ObjectsIdDelete200Response;
+import org.openapitools.model.*;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.ArrayList;

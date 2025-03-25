@@ -33,7 +33,7 @@ public class ModelObject {
     private @Nullable String name;
 
     @Valid
-    private Map<String, Object> data = new HashMap<>();
+    private ModelData data = new ModelData();
 
     public ModelObject id(String id) {
         this.id = id;
@@ -77,16 +77,8 @@ public class ModelObject {
         this.name = name;
     }
 
-    public ModelObject data(Map<String, Object> data) {
+    public ModelObject data(ModelData data) {
         this.data = data;
-        return this;
-    }
-
-    public ModelObject putDataItem(String key, Object dataItem) {
-        if (this.data == null) {
-            this.data = new HashMap<>();
-        }
-        this.data.put(key, dataItem);
         return this;
     }
 
@@ -98,11 +90,11 @@ public class ModelObject {
 
     @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("data")
-    public Map<String, Object> getData() {
+    public ModelData getData() {
         return data;
     }
 
-    public void setData(Map<String, Object> data) {
+    public void setData(ModelData data) {
         this.data = data;
     }
 
