@@ -1,11 +1,12 @@
 package org.openapitools.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.annotation.Nullable;
+
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * ModelData
